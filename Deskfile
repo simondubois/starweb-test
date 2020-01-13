@@ -1,0 +1,28 @@
+#/bin/bash
+
+export PATH=$PATH:./vendor/bin:./node_modules/.bin
+export HISTFILE=$HOME/.bash_history_starweb-test
+touch $HISTFILE
+
+function dev-install {
+    # git clone git@github.com:simondubois/starweb-test.git ./
+    composer dump-autoload
+    cp config/database.php.example config/database.php
+    sed -i "" "s/'host' => '',/'host' => 'localhost',/g" config/database.php
+    sed -i "" "s/'user' => '',/'user' => 'root',/g" config/database.php
+    sed -i "" "s/'database' => '',/'database' => 'starweb-test',/g" config/database.php
+    dev-migrate
+}
+
+function dev-migrate {
+    mysql -e "DROP DATABASE \`starweb-test\`" 2> /dev/null
+    mysql -e "CREATE DATABASE \`starweb-test\`"
+    mysql starweb-test < database.sql
+}
+
+function prod-update {
+    ssh $DESK_STARWEBTEST_PROD_HOST "cd $DESK_STARWEBTEST_PROD_PATH && git fetch"
+    ssh $DESK_STARWEBTEST_PROD_HOST "cd $DESK_STARWEBTEST_PROD_PATH && git reset origin/master --hard"
+    ssh $DESK_STARWEBTEST_PROD_HOST "cd $DESK_STARWEBTEST_PROD_PATH && php-7.3 composer dump-autoload"
+    open $DESK_STARWEBTEST_PROD_URL
+}
