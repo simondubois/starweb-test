@@ -1,0 +1,17 @@
+{
+    "name": "simon/starweb-test",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Simon Dubois",
+            "email": "simon@dubandubois.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Core\\": "core/"
+        }
+    },
+    "require": {}
+}
