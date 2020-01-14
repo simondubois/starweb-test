@@ -13,5 +13,9 @@
             "Core\\": "core/"
         }
     },
-    "require": {}
+    "require": {},
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.5",
+        "phpmd/phpmd": "^2.8"
+    }
 }
