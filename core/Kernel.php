@@ -8,6 +8,23 @@ namespace Core;
 class Kernel
 {
     /**
+     * Router instance.
+     *
+     * @var Router
+     */
+    protected $router;
+
+    /**
+     * Boot the kernel.
+     *
+     * @param Router $router
+     */
+    public function __construct(Router $router)
+    {
+        $this->router = $router;
+    }
+
+    /**
      * Process HTTP request and send the result.
      *
      * @param string $method
@@ -16,6 +33,6 @@ class Kernel
      */
     public function processHttpRequest(string $method, string $uri): void
     {
-        echo 'Request processed.';
+        $route = $this->router->resolve($method, $uri);
     }
 }
