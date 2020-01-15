@@ -17,6 +17,7 @@ class Container
      * @var array<object|null>
      */
     protected $singletons = [
+        Config::class => null,
         Container::class => null,
         Database::class => null,
         Kernel::class => null,
