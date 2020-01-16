@@ -8,6 +8,13 @@ namespace Core;
 class Kernel
 {
     /**
+     * Container instance.
+     *
+     * @var Container
+     */
+    protected $container;
+
+    /**
      * Router instance.
      *
      * @var Router
@@ -17,10 +24,12 @@ class Kernel
     /**
      * Boot the kernel.
      *
+     * @param Container $container
      * @param Router $router
      */
-    public function __construct(Router $router)
+    public function __construct(Container $container, Router $router)
     {
+        $this->container = $container;
         $this->router = $router;
     }
 
@@ -34,5 +43,9 @@ class Kernel
     public function processHttpRequest(string $method, string $uri): void
     {
         $route = $this->router->resolve($method, $uri);
+
+        $this->container
+            ->call($route->controllerName(), $route->controllerMethod())
+            ->render();
     }
 }
