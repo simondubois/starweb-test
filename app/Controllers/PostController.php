@@ -21,4 +21,15 @@ class PostController
             'posts' => $post->all(),
         ]);
     }
+
+    /**
+     * Build the HTML view to create a new post.
+     *
+     * @param Response $response
+     * @return Response
+     */
+    public function create(Response $response): Response
+    {
+        return $response->view('posts/create', ['title' => 'New post']);
+    }
 }

@@ -5,6 +5,11 @@
 
     <h1>
         <?php $this->echo($this->title) ?>
+        <small>
+            <a href="/create">
+                new post
+            </a>
+        </small>
     </h1>
 
     <?php foreach ($this->posts as $post) : ?>

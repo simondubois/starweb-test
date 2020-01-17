@@ -1,0 +1,21 @@
+
+* {
+    box-sizing: border-box;
+}
+
+form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+form input[type=text],
+form textarea {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid lightgray;
+}
+
+form input[type=submit] {
+    float: right;
+}
