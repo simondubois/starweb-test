@@ -17,6 +17,11 @@
 
             <h2>
                 <?php $this->echo($post->title) ?>
+                <small>
+                    <a href="/edit?post_id=<?php $this->echo($post->id) ?>">
+                        edit
+                    </a>
+                </small>
             </h2>
 
             <p>
