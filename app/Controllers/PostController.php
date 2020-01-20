@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Post;
 use App\Requests\EditPostRequest;
 use App\Requests\StorePostRequest;
+use App\Requests\UpdatePostRequest;
 use Core\Response;
 
 class PostController
@@ -69,5 +70,29 @@ class PostController
             'title' => 'Edit the post',
             'post' => $request->post(),
         ]);
+    }
+
+    /**
+     * Update an existing post.
+     *
+     * @param UpdatePostRequest $request
+     * @param Response $response
+     * @return Response
+     */
+    public function update(UpdatePostRequest $request, Response $response): Response
+    {
+        if ($request->validationFails()) {
+            if (array_key_exists('post_id', $request->validatedInput())) {
+                return $response->unprocessableEntity("/edit?post_id={$request->input('post_id')}");
+            }
+            return $response->unprocessableEntity('/');
+        }
+
+        $request->post()->update([
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+        ]);
+
+        return $response->redirect('/');
     }
 }
