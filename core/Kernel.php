@@ -44,6 +44,13 @@ class Kernel
     {
         $route = $this->router->resolve($method, $uri);
 
+        if (is_null($route)) {
+            $this->container
+                ->call(Response::class, 'notFound')
+                ->render();
+            return;
+        }
+
         $this->container
             ->call($route->controllerName(), $route->controllerMethod())
             ->render();

@@ -7,6 +7,8 @@ namespace Core;
  */
 class Response implements Renderable
 {
+    use BuildCompleteResponses;
+
     /**
      * HTTP status code.
      *
